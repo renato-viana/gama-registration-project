@@ -1,0 +1,69 @@
+{
+  "customers": [
+    {
+      "fullName": "Renato Borges Viana",
+      "cpf": "84282294060",
+      "cep": "28680970",
+      "street": "Avenida Governador Roberto Silveira",
+      "number": 114,
+      "city": "Cachoeiras de Macacu",
+      "state": "RJ",
+      "id": 1
+    },
+    {
+      "fullName": "Ana Fernandez",
+      "cpf": "48313972025",
+      "cep": "74932040",
+      "street": "Rua 11 A",
+      "number": 71,
+      "city": "Aparecida de Goiânia",
+      "state": "GO",
+      "id": 2
+    },
+    {
+      "fullName": "Carlos Cabral",
+      "cpf": "17118568007",
+      "cep": "92410290",
+      "street": "Rua Tietê",
+      "number": 0,
+      "city": "Canoas",
+      "state": "RS",
+      "id": 3
+    }
+  ],
+  "companies": [
+    {
+      "sender": "Victor e Sônia Marcenaria ME",
+      "cnpj": "86618266000118",
+      "cep": "24801016",
+      "street": "Rua E",
+      "number": 800,
+      "city": "Itaboraí",
+      "state": "RJ",
+      "deliveryFee": 10,
+      "id": 1
+    },
+    {
+      "sender": "Paulo e Manoel Ferragens ME",
+      "cnpj": "94880331000107",
+      "cep": "24471750",
+      "street": "Rua Joseli Anunciato",
+      "number": 529,
+      "city": "São Gonçalo",
+      "state": "RJ",
+      "deliveryFee": 15,
+      "id": 2
+    },
+    {
+      "sender": "Luiza e Sebastião Pizzaria ME",
+      "cnpj": "02828596000148",
+      "cep": "04844570",
+      "street": "Rua Don Giovanni",
+      "number": 358,
+      "city": "São Paulo",
+      "state": "SP",
+      "deliveryFee": 0,
+      "id": 3
+    }
+  ]
+}

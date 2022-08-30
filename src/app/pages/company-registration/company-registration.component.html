@@ -1,0 +1,135 @@
+<section class="page-section" id="contact">
+  <div class="container">
+    <h2
+      class="page-section-heading text-center text-uppercase text-secondary mb-0"
+    >
+      Cadastro Empresa
+    </h2>
+    <div class="divider-custom">
+      <div class="divider-custom-line"></div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-7">
+        <form [formGroup]="companyResgitrationForm">
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="sender"
+              type="text"
+              placeholder="Digite o nome da empresa."
+              formControlName="sender"
+              [class.is-invalid]="showError('sender')"
+            />
+            <label for="sender">Remetente</label>
+            <div class="invalid-feedback">Nome da empresa é obrigatório.</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="cnpj"
+              type="cnpj"
+              placeholder="Digite cnpj da sua empresa."
+              formControlName="cnpj"
+              mask="00.000.000/0000-99"
+              [class.is-invalid]="showError('cnpj')"
+            />
+            <label for="cnpj">Cnpj</label>
+            <div class="invalid-feedback">Cnpj é obrigatório.</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="cep"
+              type="text"
+              placeholder="Digite seu cep."
+              formControlName="cep"
+              mask="00000-999"
+              [class.is-invalid]="showError('cep')"
+              (blur)="fetchViaCep()"
+            />
+            <label for="cep">Cep</label>
+            <div class="invalid-feedback">Cep é obrigatório.</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="street"
+              type="text"
+              placeholder="Digite sua rua."
+              formControlName="street"
+              [class.is-invalid]="showError('street')"
+            />
+            <label for="street">Rua</label>
+            <div class="invalid-feedback">Rua é obrigatório.</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="number"
+              type="number"
+              min="0"
+              placeholder="Digite seu número."
+              formControlName="number"
+              [class.is-invalid]="showError('number')"
+            />
+            <label for="number">Número</label>
+            <div class="invalid-feedback">Número é obrigatório.</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="city"
+              type="text"
+              placeholder="Digite sua cidade."
+              formControlName="city"
+              [class.is-invalid]="showError('city')"
+            />
+            <label for="city">Cidade</label>
+            <div class="invalid-feedback">Cidade é obrigatório.</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="state"
+              type="text"
+              placeholder="Digite seu estado."
+              formControlName="state"
+              [class.is-invalid]="showError('state')"
+            />
+            <label for="state">Estado</label>
+            <div class="invalid-feedback">Estado é obrigatório.</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="deliveryFee"
+              type="number"
+              min="0"
+              placeholder="Digite o valor do frete."
+              formControlName="deliveryFee"
+              [class.is-invalid]="showError('deliveryFee')"
+            />
+            <label for="deliveryFee">Valor do frete</label>
+            <div class="invalid-feedback">Valor do frete é obrigatório.</div>
+          </div>
+
+          <button
+            class="btn btn-primary btn-xl"
+            id="submitButton"
+            type="submit"
+            (click)="onSubmit()"
+          >
+            Cadastrar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+<div class="container text-center">
+  <div class="table-responsive">
+    <table class="table table-bordered table-light table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">CPF</th>
+          <th scope="col">CEP</th>
+          <th scope="col">Rua</th>
+          <th scope="col">Número</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Frete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of companies">
+          <td>{{ company.id }}</td>
+          <td>{{ company.sender }}</td>
+          <td>{{ company.cnpj | mask: "00.000.000/0000-99" }}</td>
+          <td>{{ company.cep | mask: "00000-999" }}</td>
+          <td>{{ company.street }}</td>
+          <td>{{ company.number }}</td>
+          <td>{{ company.city }}</td>
+          <td>{{ company.state }}</td>
+          <td>{{ company.deliveryFee | currency: "BRL" }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <button type="button" class="btn btn-primary" (click)="redirect()">
+      Cadastrar
+    </button>
+  </div>
+</div>
