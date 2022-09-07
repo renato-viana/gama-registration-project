@@ -16,12 +16,11 @@ export class DashboardComponent implements OnInit {
   }
 
   openCustomerTable() {
-    const modalRef = this.modalService.open(CustomerTableComponent, { size: 'lg' });
-    modalRef.componentInstance.name = 'World';
+    this.modalService.open(CustomerTableComponent, { size: 'xl' });
   }
 
   openCompanyTable() {
-    const modalRef = this.modalService.open(CompanyTableComponent, { size: 'lg' });
+    this.modalService.open(CompanyTableComponent, { size: 'xl' });
   }
 
 }

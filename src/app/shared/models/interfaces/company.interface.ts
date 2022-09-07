@@ -1,22 +1,22 @@
 export interface CompanyRequest {
-    sender: string,
+    name: string,
     cnpj: string,
+    email: string,
     cep: string
-    street: string,
-    number: number,
+    endereco: string,
     city: string,
-    state: string,
-    deliveryFee: number
+    country: string,
+    price: number
 }
 
 export interface CompanyResponse {
     id: number
-    sender: string,
+    name: string,
     cnpj: string,
+    email: string,
     cep: string
-    street: string,
-    number: number,
+    endereco: string,
     city: string,
-    state: string,
-    deliveryFee: number
+    country: string,
+    price: number
 }

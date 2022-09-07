@@ -1,20 +1,20 @@
 export interface CustomerRequest {
-    fullName: string,
+    name: string,
+    email: string,
     cpf: string,
     cep: string
-    street: string,
-    number: number,
+    endereco: string,
     city: string,
-    state: string,
+    country: string
 }
 
 export interface CustomerResponse {
     id: number,
-    fullName: string,
+    name: string,
+    email: string,
     cpf: string,
     cep: string
-    street: string,
-    number: number,
+    endereco: string,
     city: string,
-    state: string,
+    country: string
 }

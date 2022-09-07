@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
 
 import { CompanyTableComponent } from './components/company-table/company-table.component';
@@ -20,7 +21,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) | null = null;
   imports: [
     CommonModule,
     RouterModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    FontAwesomeModule
   ],
   exports: [
     HeaderComponent,

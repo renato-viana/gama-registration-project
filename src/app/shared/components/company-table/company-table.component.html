@@ -5,32 +5,55 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nome</th>
-          <th scope="col">CPF</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">CNPJ</th>
           <th scope="col">CEP</th>
           <th scope="col">Rua</th>
-          <th scope="col">Número</th>
           <th scope="col">Cidade</th>
-          <th scope="col">Estado</th>
+          <th scope="col">País</th>
           <th scope="col">Frete</th>
+          <th scope="col">Ação</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let company of companies">
           <td>{{ company.id }}</td>
-          <td>{{ company.sender }}</td>
+          <td>{{ company.name }}</td>
+          <td>{{ company.email }}</td>
           <td>{{ company.cnpj | mask: "00.000.000/0000-99" }}</td>
           <td>{{ company.cep | mask: "00000-999" }}</td>
-          <td>{{ company.street }}</td>
-          <td>{{ company.number }}</td>
+          <td>{{ company.endereco }}</td>
           <td>{{ company.city }}</td>
-          <td>{{ company.state }}</td>
-          <td>{{ company.deliveryFee | currency: "BRL" }}</td>
+          <td>{{ company.country }}</td>
+          <td>{{ company.price | currency: "BRL" }}</td>
+          <td>
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                <button
+                  class="btn btn-primary btn-md"
+                  (click)="redirectToUpdateCompany(company.id)"
+                >
+                  <fa-icon [icon]="faPenToSquare"></fa-icon>
+                </button>
+                <button
+                  class="btn btn-danger btn-md"
+                  (click)="deleteCompany(company.id)"
+                >
+                  <fa-icon [icon]="faTrashCan"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="d-grid gap-2 col-6 mx-auto">
-    <button type="button" class="btn btn-primary" (click)="redirect()">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="redirectToAddCompany()"
+    >
       Cadastrar
     </button>
   </div>

@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 
@@ -18,8 +19,9 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
-    SharedModule
+    ToastrModule.forRoot({ positionClass: 'toast-center-center' }),
+    SharedModule,
+    FontAwesomeModule
   ],
   providers: [
     NgbModal,

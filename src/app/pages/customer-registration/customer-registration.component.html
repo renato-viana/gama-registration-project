@@ -14,14 +14,27 @@
           <div class="form-floating mb-3">
             <input
               class="form-control"
-              id="fullName"
+              id="name"
               type="text"
               placeholder="Digite seu nome."
-              formControlName="fullName"
-              [class.is-invalid]="showError('fullName')"
+              formControlName="name"
+              [class.is-invalid]="showError('name')"
             />
-            <label for="fullName">Nome completo</label>
+            <label for="name">Nome completo</label>
             <div class="invalid-feedback">Nome é obrigatório.</div>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="email"
+              type="text"
+              placeholder="Digite seu email."
+              formControlName="email"
+              [class.is-invalid]="showError('email')"
+            />
+            <label for="email">E-mail</label>
+            <div class="invalid-feedback">E-mail é obrigatório.</div>
           </div>
 
           <div class="form-floating mb-3">
@@ -56,17 +69,17 @@
           <div class="form-floating mb-3">
             <input
               class="form-control"
-              id="street"
+              id="endereco"
               type="text"
               placeholder="Digite sua rua."
-              formControlName="street"
-              [class.is-invalid]="showError('street')"
+              formControlName="endereco"
+              [class.is-invalid]="showError('endereco')"
             />
-            <label for="street">Rua</label>
+            <label for="endereco">Rua</label>
             <div class="invalid-feedback">Rua é obrigatório.</div>
           </div>
 
-          <div class="form-floating mb-3">
+          <!-- <div class="form-floating mb-3">
             <input
               class="form-control"
               id="number"
@@ -78,6 +91,19 @@
             />
             <label for="number">Número</label>
             <div class="invalid-feedback">Número é obrigatório.</div>
+          </div> -->
+
+          <div class="form-floating mb-3">
+            <input
+              class="form-control"
+              id="country"
+              type="text"
+              placeholder="Digite seu país."
+              formControlName="country"
+              [class.is-invalid]="showError('country')"
+            />
+            <label for="country">País</label>
+            <div class="invalid-feedback">País é obrigatório.</div>
           </div>
 
           <div class="form-floating mb-3">
@@ -93,7 +119,7 @@
             <div class="invalid-feedback">Cidade é obrigatório.</div>
           </div>
 
-          <div class="form-floating mb-3">
+          <!-- <div class="form-floating mb-3">
             <input
               class="form-control"
               id="state"
@@ -104,7 +130,7 @@
             />
             <label for="state">Estado</label>
             <div class="invalid-feedback">Estado é obrigatório.</div>
-          </div>
+          </div> -->
 
           <button
             class="btn btn-primary btn-xl"
@@ -112,7 +138,7 @@
             type="submit"
             (click)="onSubmit()"
           >
-            Cadastrar
+            {{ isUpdating() ? "Atualizar" : "Cadastrar" }}
           </button>
         </form>
       </div>

@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: "",
     component: CustomerRegistrationComponent
+  },
+  {
+    path: ":id/update",
+    component: CustomerRegistrationComponent
   }
 ];
 

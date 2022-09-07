@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
@@ -16,6 +17,9 @@ export class CompanyTableComponent implements OnInit {
 
   companies: CompanyResponse[] = [];
 
+  faTrashCan = faTrashCan;
+  faPenToSquare = faPenToSquare;
+
   constructor(
     private companyService: CompanyService,
     private toastr: ToastrService,
@@ -24,15 +28,15 @@ export class CompanyTableComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadCompanys();
+    this.loadCompanies();
   }
 
-  loadCompanys(): void {
+  loadCompanies(): void {
     this.companyService.getCompanies()
       .pipe(take(1))
       .subscribe(
         {
-          next: res => this.onSucess(res),
+          next: res => this.onSucess(res.content),
           error: _error => this.onError()
         }
       )
@@ -46,8 +50,28 @@ export class CompanyTableComponent implements OnInit {
     this.toastr.error('Erro!', 'Oops! Algo deu errado :(');
   }
 
-  redirect(): void {
+  redirectToAddCompany(): void {
     this.activeModal.close(this.router.navigate(['company-registration']));
+  }
+
+  redirectToUpdateCompany(id: number) {
+    this.activeModal.close(this.router.navigate([`company-registration/${id}/update`]));
+  }
+
+  deleteCompany(id: number) {
+    this.companyService.deleteCompany(id)
+      .pipe(take(1))
+      .subscribe(
+        {
+          next: _res => this.onSuccessDelete(),
+          error: _error => this.onError()
+        }
+      )
+  }
+
+  onSuccessDelete(): void {
+    this.loadCompanies();
+    this.toastr.success('Sucesso!', 'Cliente deletado!');
   }
 
 }

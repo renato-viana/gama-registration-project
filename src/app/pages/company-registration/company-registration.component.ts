@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Cep } from 'src/app/shared/models/interfaces/cep.interface';
@@ -17,25 +17,39 @@ export class CompanyRegistrationComponent implements OnInit {
 
   companyResgitrationForm!: FormGroup;
 
+  idCompany!: number;
+
   constructor(
     private fb: FormBuilder,
     private companyService: CompanyService,
     private toastr: ToastrService,
     private cepService: CepService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
 
+    this.initializeForm();
+
+    this.idCompany = Number(this.route.snapshot.paramMap.get('id'));
+
+    if (this.isUpdating()) {
+      this.loadCompany();
+    }
+
+  }
+
+  initializeForm() {
     this.companyResgitrationForm = this.fb.group({
-      sender: ['', Validators.required],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       cnpj: ['', [Validators.required]],
       cep: ['', Validators.required],
-      street: ['', Validators.required],
-      number: ['', Validators.required],
+      endereco: ['', Validators.required],
       city: ['', [Validators.required, Validators.maxLength(30)]],
-      state: ['', [Validators.required, Validators.maxLength(20)]],
-      deliveryFee: ['', Validators.required]
+      country: ['', [Validators.required, Validators.maxLength(60)]],
+      price: ['', Validators.required]
     });
   }
 
@@ -52,7 +66,14 @@ export class CompanyRegistrationComponent implements OnInit {
 
       return;
     }
+
     const company: CompanyRequest = this.companyResgitrationForm.value;
+
+    if (this.isUpdating()) {
+      this.updateCompany(this.idCompany, company);
+      return;
+    }
+
     this.addCompany(company);
   }
 
@@ -76,6 +97,50 @@ export class CompanyRegistrationComponent implements OnInit {
   onError(): void {
     this.toastr.error('Erro!', 'Empresa não cadastrada, tente novamente :(');
   }
+
+  updateCompany(id: number, company: CompanyRequest) {
+    this.companyService.updateCompany(id, company)
+      .pipe(take(1))
+      .subscribe(
+        {
+          next: res => this.onSucessUpdate(),
+          error: _error => this.onErrorUpdate(),
+        }
+
+      )
+  }
+
+  onSucessUpdate(): void {
+    this.router.navigate([`dashboard`]);
+    this.toastr.success('Successo!', 'Empresa atualizada');
+  }
+
+  onErrorUpdate(): void {
+    this.toastr.error('Erro!', 'Empresa não atualizado, tente novamente :(');
+  }
+
+  loadCompany() {
+
+    this.companyService.getCompany(this.idCompany)
+      .pipe(take(1))
+      .subscribe(
+        {
+          next: res => this.onSucessLoadCompany(res),
+          error: _error => this.onErrorLoadCompany(),
+        }
+
+      )
+  }
+
+  onSucessLoadCompany(company: CompanyRequest): void {
+    this.companyResgitrationForm.patchValue(company);
+  }
+
+  onErrorLoadCompany(): void {
+    this.toastr.error('Erro!', 'Dados da empresa não foram carregados, tente novamente :(');
+  }
+
+  isUpdating = () => Boolean(this.idCompany);
 
   showError(controlName: string): boolean {
     if (!this.companyResgitrationForm.get(controlName)) {
@@ -104,9 +169,8 @@ export class CompanyRegistrationComponent implements OnInit {
     if (cep) {
       this.companyResgitrationForm.patchValue(
         {
-          street: cep.logradouro,
-          city: cep.localidade,
-          state: cep.uf
+          endereco: cep.logradouro,
+          city: cep.localidade
         }
       )
     }

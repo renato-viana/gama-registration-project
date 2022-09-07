@@ -5,30 +5,53 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nome</th>
+          <th scope="col">E-mail</th>
           <th scope="col">CPF</th>
           <th scope="col">CEP</th>
           <th scope="col">Rua</th>
-          <th scope="col">Número</th>
           <th scope="col">Cidade</th>
-          <th scope="col">Estado</th>
+          <th scope="col">País</th>
+          <th scope="col">Ação</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let customer of customers">
           <td>{{ customer.id }}</td>
-          <td>{{ customer.fullName }}</td>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.email }}</td>
           <td>{{ customer.cpf | mask: "000.000.000-99" }}</td>
           <td>{{ customer.cep | mask: "00000-999" }}</td>
-          <td>{{ customer.street }}</td>
-          <td>{{ customer.number }}</td>
+          <td>{{ customer.endereco }}</td>
           <td>{{ customer.city }}</td>
-          <td>{{ customer.state }}</td>
+          <td>{{ customer.country }}</td>
+          <td>
+            <div class="row">
+              <div class="col-sm-12 text-center">
+                <button
+                  class="btn btn-primary btn-md"
+                  (click)="redirectToUpdateCustomer(customer.id)"
+                >
+                  <fa-icon [icon]="faPenToSquare"></fa-icon>
+                </button>
+                <button
+                  class="btn btn-danger btn-md"
+                  (click)="deleteCustomer(customer.id)"
+                >
+                  <fa-icon [icon]="faTrashCan"></fa-icon>
+                </button>
+              </div>
+            </div>
+          </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="d-grid gap-2 col-6 mx-auto">
-    <button type="button" class="btn btn-primary" (click)="redirect()">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="redirectToAddCustomer()"
+    >
       Cadastrar
     </button>
   </div>

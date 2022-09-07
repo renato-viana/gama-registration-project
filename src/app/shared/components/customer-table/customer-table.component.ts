@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faPenToSquare, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
@@ -14,6 +15,9 @@ import { CustomerService } from 'src/app/shared/services/customer/customer.servi
 export class CustomerTableComponent implements OnInit {
 
   customers: CustomerResponse[] = [];
+
+  faTrashCan = faTrashCan;
+  faPenToSquare = faPenToSquare;
 
   constructor(
     private customerService: CustomerService,
@@ -31,7 +35,7 @@ export class CustomerTableComponent implements OnInit {
       .pipe(take(1))
       .subscribe(
         {
-          next: res => this.onSucess(res),
+          next: res => this.onSucess(res.content),
           error: _error => this.onError()
         }
       )
@@ -45,8 +49,28 @@ export class CustomerTableComponent implements OnInit {
     this.toastr.error('Erro!', 'Oops! Algo deu errado :(');
   }
 
-  redirect(): void {
+  redirectToAddCustomer(): void {
     this.activeModal.close(this.router.navigate(['customer-registration']));
+  }
+
+  redirectToUpdateCustomer(id: number) {
+    this.activeModal.close(this.router.navigate([`customer-registration/${id}/update`]));
+  }
+
+  deleteCustomer(id: number) {
+    this.customerService.deleteCustomer(id)
+      .pipe(take(1))
+      .subscribe(
+        {
+          next: _res => this.onSuccessDelete(),
+          error: _error => this.onError()
+        }
+      )
+  }
+
+  onSuccessDelete(): void {
+    this.loadCustomers();
+    this.toastr.success('Sucesso!', 'Cliente deletado!');
   }
 
 }
